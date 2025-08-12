@@ -1,0 +1,129 @@
+/* Clean, minimal header styles */
+header {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove any potential margin/padding that could cause white space */
+* {
+  box-sizing: border-box;
+}
+
+/* Basic hover effects only */
+.nav-link {
+  @apply px-4 py-2 rounded-lg text-base-content hover:bg-base-200 transition-colors;
+}
+
+.dropdown-item {
+  @apply flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-base-200 transition-colors;
+}
+
+.mobile-nav-item {
+  @apply flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-base-200/50 transition-colors duration-200;
+}
+
+.nav-link-underline {
+  @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 transition-all duration-300;
+}
+
+.nav-link:hover .nav-link-underline {
+  @apply w-3/4;
+}
+
+.dropdown-item-large {
+  @apply flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-base-200/50 transition-colors duration-200;
+}
+
+.theme-option {
+  @apply flex items-center space-x-3 px-4 py-2 hover:bg-base-200/30 transition-colors duration-200;
+}
+
+/* Animation for navbar on scroll */
+.navbar-scrolled {
+  @apply h-16 shadow-md;
+}
+.nav-container {
+  --glow-opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.nav-container:hover {
+  --glow-opacity: 0.03;
+  box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.2);
+}
+
+.nav-item {
+  position: relative;
+  isolation: isolate;
+}
+
+.nav-underline {
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, currentColor 0%, transparent 100%);
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0.8;
+}
+
+.nav-item:hover .nav-underline {
+  width: 70%;
+  opacity: 1;
+}
+
+.nav-item.active .nav-underline {
+  width: 85%;
+  opacity: 1;
+  background: linear-gradient(90deg, currentColor 0%, transparent 100%);
+}
+
+.icon-wrapper {
+  transition: transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.nav-item:hover .icon-wrapper {
+  transform: translateY(-3px) scale(1.1);
+}
+
+.nav-item.active .icon-wrapper {
+  transform: scale(1.15);
+  animation: gentlePulse 3s ease infinite;
+}
+
+@keyframes gentlePulse {
+  0%,
+  100% {
+    transform: scale(1.15);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Glow effect */
+.nav-item::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  background: radial-gradient(
+    circle at center,
+    currentColor 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.nav-item:hover::before {
+  opacity: var(--glow-opacity);
+}
+
+.header-disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
