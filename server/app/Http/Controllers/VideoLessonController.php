@@ -14,7 +14,10 @@ class VideoLessonController extends Controller
     public function index(Request $request) { 
         $page = $request->query('page', 1);
         $limit = $request->query('limit', 10);
-        $videoLessons = VideoLesson::orderBy('created_at', 'desc')->paginate($limit, ['*'], 'page', $page);
+        $title = $request->query('title');
+        $videoLessons = VideoLesson::where('title', 'like', '%' . $title . '%')
+                                    ->orderBy('created_at', 'desc')
+                                    ->paginate($limit, ['*'], 'page', $page);
         return $this->apiResponse([
             'data' => VideoLessonResource::collection($videoLessons),
             'pagination' => [

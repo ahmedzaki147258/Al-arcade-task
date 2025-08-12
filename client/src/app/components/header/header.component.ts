@@ -15,8 +15,6 @@ export class HeaderComponent {
     public themingService: ThemingService,
   ) {}
 
-  ngOnInit(): void {}
-
   toggleTheme() {
     const newTheme = this.themingService.currentTheme === 'dark' ? 'light' : 'dark';
     this.themingService.setTheme(newTheme);
